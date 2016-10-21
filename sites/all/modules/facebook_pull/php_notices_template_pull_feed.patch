@@ -1,0 +1,16 @@
+diff --git a/facebook_pull-feed.tpl.php b/facebook_pull-feed.tpl.php
+index b89f974..a680d89 100644
+--- a/facebook_pull-feed.tpl.php
++++ b/facebook_pull-feed.tpl.php
+@@ -4,9 +4,9 @@
+     <span class="facebook-feed-picture"><img alt="<?php echo $item->from->name; ?>" src="http://graph.facebook.com/<?php echo $item->from->id; ?>/picture" /></span>
+     <span class="facebook-feed-from"><a href="http://facebook.com/profile.php?id=<?php echo $item->from->id; ?>"><?php echo $item->from->name; ?></a></span>
+     <span class="facebook-feed-message">
+-      <?php echo $item->message; ?>
++      <?php if(isset($item->message)) echo $item->message; ?>
+       <?php if ($item->type === 'link'): ?>
+-        <?php echo $item->description; ?>
++        <?php if(isset($item->description)) echo $item->description; ?>
+         <?php echo l($item->name, $item->link); ?>
+       <?php endif; ?>
+     </span>

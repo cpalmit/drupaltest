@@ -1,0 +1,70 @@
+name = Responsive Three Column Layout (Standard)
+description = Wellesley customized Bootstrap Sub-theme.
+core = 7.x
+base theme = bootstrap
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Regions
+;;;;;;;;;;;;;;;;;;;;;
+
+regions[help]           = 'Help'
+regions[navigation]     = 'Header'
+regions[highlighted]    = 'Full Width Section'
+regions[content]        = 'Content'
+regions[sidebar_first]  = 'Left Sidebar'
+regions[left_quicklinks]  = 'Left Quicklinks'
+regions[sidebar_second] = 'Right Sidebar'
+regions[page_bottom]    = 'Page Bottom'
+regions[footer]         = 'Footer'
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Stylesheets
+;;;;;;;;;;;;;;;;;;;;;
+
+stylesheets[all][] = ../css/global_style.css
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/homepage.css
+stylesheets[print][] = ../css/print.css
+;stylesheets[all][] = css/news.css
+
+
+; For information on choosing the desired method, please read the Drupal
+; Bootstrap sub-theme "how-to" documentation:
+; https://drupal.org/node/1978010
+
+; ;----------------------------------
+; ; METHOD 1: Bootstrap Source Files
+; ;----------------------------------
+;
+; ;;;;;;;;;;;;;;;;;;;;;
+; ;; Scripts
+; ;;;;;;;;;;;;;;;;;;;;;
+;
+; scripts[] = 'bootstrap/js/affix.js'
+; scripts[] = 'bootstrap/js/alert.js'
+; scripts[] = 'bootstrap/js/button.js'
+; scripts[] = 'bootstrap/js/carousel.js'
+; scripts[] = 'bootstrap/js/collapse.js'
+; scripts[] = 'bootstrap/js/dropdown.js'
+; scripts[] = 'bootstrap/js/modal.js'
+; scripts[] = 'bootstrap/js/tooltip.js'
+; scripts[] = 'bootstrap/js/popover.js'
+; scripts[] = 'bootstrap/js/scrollspy.js'
+; scripts[] = 'bootstrap/js/tab.js'
+; scripts[] = 'bootstrap/js/transition.js'
+;
+; ; Disable BootstrapCDN if using Bootstrap source files in your sub-theme.
+; settings[bootstrap_cdn] = ''
+
+scripts[] = ../../../libraries/masonry/jquery.masonry.min.js
+
+
+; ;-------------------------
+; ; METHOD 2: Bootstrap CDN
+; ;-------------------------
+;
+; Method 2 uses BootstrapCDN, the only thing you might need to provide here
+; is overrides to Bootstrap theme settings. Copy them here from the base theme
+; to override.

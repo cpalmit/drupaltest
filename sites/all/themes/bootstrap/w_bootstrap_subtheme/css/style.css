@@ -1,0 +1,45 @@
+/* Right Sidebar (or page bottom) */
+	.right-column {
+		background-color: #fff !important;
+	}
+	.right-column img {
+		max-width: 60px;
+		width: 100%;
+		height: auto !important;
+		float: left;
+		margin: 0 15px 15px 0;
+	}
+	@media (min-width: 768px) {
+		.right-column img {
+			max-width: 180px;
+			width: 100%;
+		}
+	}
+	.right-column h2,
+	.right-column h2 a,
+	.right-column h2 a:hover {
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-size: 15px;
+		color: #002776;
+		text-align: left;
+		/* This margin/padding is causing right column to be vertically aligned too low */
+		/*margin-bottom: 10px;
+		padding-bottom: 6px;
+	    padding-top: 6px;*/
+	    /* The line height is also too big, pushing it down a little */
+	    line-height: 15px;
+	    text-transform: capitalize;
+	    text-decoration: none;
+	    font-weight: normal;
+	}
+	.right-column a,
+	.right-column p,
+	.right-column {
+		font-size: 14px !important;
+	}
+
+/* News List View */
+	/*ul.listnews li.listnews-row img {
+		margin: 5px 15px 10px 0;
+	}*/
+

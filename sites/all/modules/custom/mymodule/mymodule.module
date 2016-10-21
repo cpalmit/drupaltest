@@ -1,0 +1,52 @@
+<?php
+/*function mymodule_init(){   
+  dpm('what is this madness?');
+}*/
+
+function mymodule_menu(){
+  $items = array();
+  $items['mymodule'] = array(
+  	'title' => 'My Page',
+    'description' => 'Landing Page for My Module',
+    'page callback' => 'mymodule_callback',
+    'access arguments' => array('access content'),
+    );
+    return $items;
+}
+
+function mymodule_callback(){
+  return 'My first page callback';
+}
+
+//mucking with the article content type.
+function mymodule_form_alter(&$form, &$form_state, $form_id){
+  dsm($form_id);  //so I know the id of the form
+  if($form_id == 'article_node_form'){
+  	$form['actions']['submit']['#value'] = t('Submit!'); //changes button label
+  	$form['title']['#title'] = 'Title Goes Here';  //changes field label
+  }
+
+   if($form_id == 'entity_on_social_node_form'){
+  	//$form['title']['#title'] = 'Website Link test: http://www.example.com';  //changes field label
+  	$form['body']['#title'] = t('Description (optional)');  //changes field label
+  	$form['field_websitelink']['#title'] = t('Website Link');  //changes field label
+  	//$form['actions']['submit']['#value'] = t('Submit!'); //changes button label
+  }
+}
+
+//twitter pull?
+function twitter_pull_blocks() {
+  return array(
+    0 => (object) array(
+      'delta' => 'twitter_test_0',
+      'tweetkey' => 'wellesley',
+      'title' => 'Wellesley',
+      'name'  => 'Wellesley Tweet Feed',    
+      'number_of_items' => 5,
+      'theme_key' => 'twitter_pull_listing',    
+    )
+  ); 
+}
+
+if (function_exists('twitter_pull_render')) { 
+	print twitter_pull_render('@wellesleymag', 'Wellesleymag', 3); }

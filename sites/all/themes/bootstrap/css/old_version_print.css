@@ -1,0 +1,173 @@
+/*print */
+
+
+.left-column {
+	display: none !important;
+}
+
+
+.footer {
+	display: none !important;
+}
+
+#fixed-menu-max  {
+	display: none !important;
+}
+
+
+.middle-column .node-page h2 a {
+	display: none;
+	/*color: red !important;*/
+}
+
+.middle-column {
+    width: 100% !important;
+}
+
+.right-column {
+	display: none !important;
+}
+
+.breadcrumb {
+	display: none !important;
+}
+
+/*.slider-wrapper, .wellesley-slider, .wellesley-nav {
+	display: none !important;
+}*/
+
+p {
+	font-size: 11px !important;
+	line-height: 14px;
+	color: #000000;
+	font-family: 'Swiss721BT',Helvetica,sans-serif;
+}
+
+
+a:link, a:visited, a:active  {
+	color: #333;
+	text-decoration:none;
+	font-weight: bold;
+}
+
+h1 {
+	font: 16px/18px 'Adobe Garamond Pro', Garamond, serif;
+	color: #000000;
+}
+
+h2 {
+	font: bold 14px/16px 'Adobe Garamond Pro', Garamond, serif;
+	color: #444444;
+	margin-bottom: 0px;
+		}
+
+h3 {
+ 	font: bold 12px/14px  'Adobe Garamond Pro', Garamond, serif;
+	color: #444444;
+	margin-bottom: 0px;
+	 margin-top:0px;
+}
+
+h4 {
+	font: bold 12px/14px 'Adobe Garamond Pro', Garamond, serif;
+  	color: #333333;
+}
+
+body,
+#navbar .navbar-collapse.collapse,
+.main-container,
+ol.breadcrumb {
+	background-color: #fff !important;
+}
+
+/*PA Additions*/
+
+
+body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
+	margin:0;
+	padding:0;
+	border-width:0;
+}
+.maincontainer {
+	margin: 30pt;
+}
+img.fullwidth {
+	width:100%;
+	height:Auto;
+}
+img.insert {
+	float: left;
+	margin: 15px 15px 15px 0;
+	width: 35%;
+	height: auto;
+}
+.center {
+	text-align:center;
+}
+p {
+	color:#000000;
+	font: 9pt/12pt "Swiss 721", helvatica, sans-serif;
+	margin-top:6px;
+	orphans:2;
+}
+
+.contactus_header {
+	color:#000000;
+	font: bold 12pt/15pt Garamond, serif;
+	margin:30pt 0 5pt;
+	orphans:2;
+}
+
+.contaceus_txt {
+	color:#000000;
+	font: 7pt/9pt "Swiss 721", sans-serif;
+	width: 150px;
+	margin: 0 10px 0 0;
+	float: left;
+	orphans:2;
+}
+h1 {
+	color:#000000;
+	font: 28pt/30pt 'Adobe Garamond Pro', serif;
+	margin: 35px 0 25px;
+	orphans:2;
+}
+/*h1 {
+	color:#000000;
+	font: 21pt/24pt 'Adobe Garamond Pro', serif;
+	margin: 35px 0 25px;
+	orphans:2;
+} repeat?*/
+
+h3 {
+	color:#000000;
+	font: 18pt/21pt Garamond, serif;
+	margin: 10px 0 0;
+	orphans:2;
+}
+h4 {
+	color:#000000;
+	font: 14pt/16pt Garamond, serif;
+	margin: 8px 0 0;
+	orphans:2;
+}
+ul {
+	margin: 6px 0 0;
+}
+li {
+	color:#000000;
+	font: 9pt/12pt "Swiss 721", helvatica, sans-serif;
+	margin: 0;
+	orphans:2;
+}
+.address {
+	color:#000000;
+	font: 7pt/9pt "Swiss 721", helvatica, sans-serif;
+	margin: 10px 0 0;
+	orphans:2;
+}
+footer {
+	margin: 100px 0 0;
+}
+
+

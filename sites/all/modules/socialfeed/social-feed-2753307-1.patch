@@ -1,0 +1,21 @@
+diff --git a/socialfeed.module b/socialfeed.module
+index 6b145b3..5cf778e 100644
+--- a/socialfeed.module
++++ b/socialfeed.module
+@@ -165,7 +165,7 @@ function socialfeed_facebook_feeds($page_name = '') {
+       $i = 0;
+       $post_type_filter = $next_post_type_filter = array();
+       $json_response = drupal_json_decode($request->data);
+-
++	if(isset($json_response['data']) && $json_response['data'] !="") {
+       foreach ($json_response['data'] as $facebook_value) {
+         // If specific post type is selected.
+         if ($display_all_posts == 0 && $facebook_value['type'] == $selected_type_value) {
+@@ -180,6 +180,7 @@ function socialfeed_facebook_feeds($page_name = '') {
+           }
+         }
+       }
++	 }
+       // Showcase of array of specific post type feeds.
+       if (array_key_exists($selected_type_value, $post_type_filter)) {
+         foreach ($post_type_filter[$selected_type_value] as $facebook_entry) {

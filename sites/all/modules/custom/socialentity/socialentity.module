@@ -1,0 +1,66 @@
+<?php
+/**
+ * @file
+ * adds a formatter for link fields to display 
+ *
+ */
+
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function socialentity_field_formatter_info() {
+  /* Each element in this array describes a type of field formatter and
+   * indicates which sorts of fields it applies to (eg. text, image), and
+   * what settings it might have
+   * A better way to do this is probably to have a module for each formatter
+   */
+  return array(
+    'socialentity_formatter_twitter' => array(
+      'label' => t('Twitter'),
+      'field types' => array('link'),
+    ),
+    'socialentity_formatter_facebook' => array(
+      'label' => t('Facebook'),
+      'field types' => array('link'),
+    ),
+    'socialentity_formatter_instagram' => array(
+      'label' => t('Instagram'),
+      'field types' => array('link'),
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function socialentity_field_formatter_view($entity_type, $entity, $field, $instance, $langcode,  $items, $display)
+{
+  /*
+   * This stuff is the actual markup output.
+   * We're just building basic render arrays here depending on which formatter's in use.
+   * If you're ever unsure of the structure of $items, just debug($items) or
+   * drupal_set_message($items) to see what's going on;
+   */
+  $element = array(); // Initialize the var
+  //$settings = $display['settings']; // get the settings
+
+  switch ($display['type']) {
+    case 'socialentity_formatter_twitter':
+      if ($items[0]['safe_value'] != "")
+      {
+        $element[0]['#markup'] = "<a class=\"twitter-timeline\" data-dnt=\"true\" href=\"https://twitter.com/hseas\"  data-widget-id=\"". $items[0]['safe_value'] ."\">Tweets</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\"://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>";
+      }
+      break;
+    case 'socialentity_formatter_facebook':
+      if ($items[0]['safe_value'] != "")
+      {
+        $element[0]['#markup'] = "<iframe src=\"//www.facebook.com/plugins/likebox.php?href=" . $items[0]['safe_value'] . "&amp;width&amp;height=395&amp;colorscheme=light&amp;show_faces=false&amp;header=false&amp;stream=true&amp;show_border=false\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; height:395px;\" allowTransparency=\"true\"></iframe>";
+      }
+      break;
+  }
+
+  // Return the render array
+  return $element;
+}

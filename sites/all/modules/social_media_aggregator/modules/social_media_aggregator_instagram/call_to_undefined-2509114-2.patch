@@ -1,0 +1,12 @@
+diff --git a/modules/social_media_aggregator_instagram/social_media_aggregator_instagram.module b/modules/social_media_aggregator_instagram/social_media_aggregator_instagram.module
+index e2963fa..01d846b 100644
+--- a/modules/social_media_aggregator_instagram/social_media_aggregator_instagram.module
++++ b/modules/social_media_aggregator_instagram/social_media_aggregator_instagram.module
+@@ -174,6 +174,7 @@ function social_media_aggregator_instagram_get_posts($identifier, $quantity, $of
+  * Get the instagram master account.
+  */
+ function social_media_aggregator_instagram_load_master_account() {
++  module_load_include('inc', 'drupagram', 'drupagram');
+   if ($values = db_query('SELECT drupagram_id FROM {drupagram_account}')->fetchAssoc()) {
+     return drupagram_account_load($values['drupagram_id']);
+   }
