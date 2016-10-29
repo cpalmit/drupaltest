@@ -611,7 +611,8 @@ $mypage_academics =
         <?php if (!empty($page['sidebar_second'])): ?>
           <section class="col-sm-9 col-md-8 middle-column">
         <?php else: ?>
-          <section class="col-sm-9 col-md-10 middle-column">
+          <!--<section class="col-sm-9 col-md-10 middle-column">-->
+          <section class="col-md-12"> <!--CP's doing for SMD-->
         <?php endif; ?>
 
             <a id="main-content"></a>
