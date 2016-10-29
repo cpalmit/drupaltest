@@ -89,8 +89,8 @@
  * @ingroup themeable
  */
 
-
-/*require_once __DIR__ . '/Facebook/autoload.php';
+//Code for getting individual info out of each fb post using PHP API
+require_once __DIR__ . '/Facebook/autoload.php';
 
 $fb = new Facebook\Facebook([
   'app_id' => '1777749775782212',
@@ -98,25 +98,52 @@ $fb = new Facebook\Facebook([
   'default_graph_version' => 'v2.5',
 ]);
 
-$data  = file_get_contents("https://graph.facebook.com/wellesleycollege/posts?fields=link,message,full_picture,created_time&access_token=1777749775782212|1z2HljSP2MaH6LbRFxLN3j48L-A&limit=3");
+$data  = file_get_contents("https://graph.facebook.com/wellesleycollege/posts?fields=link,message,full_picture,created_time&access_token=1777749775782212|1z2HljSP2MaH6LbRFxLN3j48L-A&limit=1");
 //this method can take either username or page id
+
+// I can figure out how to feed, the about field could go into the description. 
 
 $result = json_decode($data, true);
 
 //probably need to add checks to see if each item exists.. also haven't included videos
-foreach ($result['data'] as $item) {
-  echo "<div style='width:300px;'><a href='".$item['link']."'>".$item['message'] ." ". $item['created_time'] . "<br><img src='".image_style_url('large', $item['full_picture'])."' ></a></div><br>";
+/*foreach ($result['data'] as $item) {
+  echo "<div style='width:300px;'><a href='".$item['link']."'>".$item['message'] ." ". $item['created_time'] . "<br></a></div><br>";
  
-}
+}*/
 
 $link = $result['data'][0]['link'];
 $message = $result['data'][0]['message'];
-$image = $result['data'][0]['full_picture'];
+//$image = $result['data'][0]['full_picture'];
 $timestamp = $result['data'][0]['created_time'];
-echo "<a href='".$link."'>".$message ." ". $timestamp . "<br><img src='".$image."' ></a>";
+//echo "<a href='".$link."'>".$message ." ". $timestamp . "<br></a>";
+echo $timestamp;
+//$jsonprint = json_encode($data, JSON_PRETTY_PRINT);
+//echo $jsonprint;
 
-$jsonprint = json_encode($data, JSON_PRETTY_PRINT);
-echo $jsonprint;*/
+
+//now for Twitter
+require_once __DIR__ . '/Twitter/TwitterAPIExchange.php';
+$settings = array(
+    'oauth_access_token' => "250224996-eJcEcB7PYUSU6UtxwS6UNXocm5CcYhQRXv1fDWHL",
+    'oauth_access_token_secret' => "0I2MWEgfcj65FozPUnYKqIs2Jr2BiV6maTQq9bKIeleK4",
+    'consumer_key' => "jMn31iQ08zqnNoaKP0zMxOEHG",
+    'consumer_secret' => "LvLzfBBrJPLAV1Jx0I5iFVU0c0rmb5YE6p9BSOpW2TWq0KzYpU"
+);
+$username = 'wellesley';
+$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+$requestMethod = "GET";
+$getfield = '?screen_name='.$username.'&count=1';
+ 
+$twitter = new TwitterAPIExchange($settings);
+
+$twitterresult = json_decode($twitter->setGetfield($getfield)
+->buildOauth($url, $requestMethod)
+->performRequest(),$assoc = TRUE);
+
+if($twitterresult["errors"][0]["message"] != "") {echo "<h3>Sorry, there was a problem.</h3><p>Twitter returned the following error message:</p><p><em>".$twitterresult[errors][0]["message"]."</em></p>";exit();}
+$twitterdate = $twitterresult[0]['created_at'];
+echo "<br>".$twitterdate;
+
 ?>
 
 
@@ -134,7 +161,7 @@ echo $jsonprint;*/
 }
  
 .fontawe i {
-  background: #205D7A;
+  background: #cbcbcb;
   color: #fff;
   width: 60px;
   height: 60px;
@@ -145,7 +172,7 @@ echo $jsonprint;*/
   transition: all 0.2s ease-in-out;
 }
 
-.fontawe .fa-facebook {
+/*.fontawe .fa-facebook {
     background:#3b5998;
 } 
 .fontawe .fa-linkedin {
@@ -153,31 +180,36 @@ echo $jsonprint;*/
 }
 .fontawe .fa-twitter {
     background:#00aced;
-}
+}*/
 
 .smd li{
   float: left;
   list-style: none !important;
 }
 
+.grayscale {
+  -webkit-filter: grayscale(100%); filter: grayscale(100%);
+}
+
 </style>
 
 
 <?php 
-//can I use a regex to get the fb id from the url?
+//can I use a regex to get the fb id from the url? 
 
   
-  
-
   print "<p class='introText'>" . $title . "</p><p>" . render($content['body'])."</p>";
    
   // We hide the comments and links now so that we can render them later.
   hide($content['comments']);
   hide($content['links']);
-  $profilephoto = "";
+
+  //default image
+  $profilephoto = "<img src='http://placehold.it/200x200' />";
   if (isset($content)){
 
   foreach($content as $field):
+    if (isset($field['#field_name'])) {
     $fieldname = $field['#field_name'];
     $iteminfield = $field['#items']['0']['url'];
     //print $fieldname . ": " . $iteminfield . "<br>";
@@ -186,32 +218,37 @@ echo $jsonprint;*/
       print "<a class='fontawe' href=" .$iteminfield."><i class='fa fa-link'></i></a>";
     } else if ($fieldname == 'field_facebooklink'){
       print "<a class='fontawe' href=" .$iteminfield."><i class='fa fa-facebook'></i></a>";
+      print "<div style='float:right;'><iframe src='https://www.facebook.com/plugins/page.php?href=".$iteminfield."&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false&appId' width='340' height='500' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowTransparency='true'></iframe></div>"; 
 
-    //$publicFeed = $facebook->api('/1777749775782212/posts');
-    //print $publicFeed;
-
- 
-    } else if ($fieldname == 'field_twitterlink'){
+    /*} else if ($fieldname == 'field_twitterlink'){
       print "<a class='fontawe' href=" .$iteminfield."><i class='fa fa-twitter'></i></a>";
-      print "<div style='float:right;' ><a class='twitter-timeline' data-lang='en' data-width='300' data-theme='light' data-tweet-limit='1' data-link-color='#002776' href='".$iteminfield."'></a> </div><script async src='//platform.twitter.com/widgets.js' charset='utf-8'></script>";
+      print "<div style='float:right;'><a class='twitter-timeline' data-lang='en' data-width='300' data-theme='light' data-tweet-limit='1' data-link-color='#002776' href='".$iteminfield."'></a> </div><script async src='//platform.twitter.com/widgets.js' charset='utf-8'></script>";
+      $profilephoto = "<img src = 'https://twitter.com/wellesleymag/profile_image?size=original' />";*/
+    } else if ($fieldname == 'field_twitter_username'){
+      $twitterusername = $content['field_twitter_username']['#items']['0']['value'];
+      print "<a class='fontawe' href='http://www.twitter.com/".$twitterusername."'><i class='fa fa-twitter'></i></a>";
+      print "<div style='float:right;'><a class='twitter-timeline' data-lang='en' data-width='300' data-theme='light' data-tweet-limit='1' data-link-color='#002776' href='http://www.twitter.com/".$twitterusername."'></a> </div><script async src='//platform.twitter.com/widgets.js' charset='utf-8'></script>";
+      $profilephoto = "<img src = 'https://twitter.com/".$twitterusername."/profile_image?size=original' style='height:200px;' />";
+
     } else if ($fieldname == 'field_snapchat_image'){
       $imgurl = $content['field_snapchat_image']['#items']['0']['uri'];
       $username = $content['field_snapchat_username']['#items']['0']['value'];
-      $style = 'snapchat';
-      print "<a href='http://snapchat.com/add/".$username."'><img style='vertical-align:top;' src='".image_style_url($style, $imgurl)."'></a>";
+      print "<a href='http://snapchat.com/add/".$username."'><img style='vertical-align:top;' class='grayscale' src='".image_style_url('snapchat', $imgurl)."'></a>";
     }else if ($fieldname == 'field_facebook_id'){
       $fbid = $content['field_facebook_id']['#items']['0']['value'];
       $profilephoto = "<img src='http://graph.facebook.com/".$fbid."/picture?type=large' style='height:200px;' />";
-
     } else if ($fieldname =='field_instagramusername'){
       print "<a class='fontawe' href=http://www.instagram.com/" .$content['field_instagramusername']['#items']['0']['value']."><i class='fa fa-instagram'></i></a>";
-
+    } else if ($fieldname =='field_youtubelink'){
+      print "<a class='fontawe' href=" .$content['field_youtubelink']['#items']['0']['value']."><i class='fa fa-youtube'></i></a>";
     }
+  }
   endforeach;
 } 
-print "<div>".$profilephoto."</div>
 
-<div style='float:right;'  class='fb-page' data-href='https://www.facebook.com/wellesleycollege' data-tabs='timeline' data-small-header='true' data-height='500' data-adapt-container-width='true' data-hide-cover='true' data-show-facepile='false'><blockquote cite='https://www.facebook.com/wellesleycollege' class='fb-xfbml-parse-ignore'><a href='https://www.facebook.com/wellesleycollege'>Wellesley College</a></blockquote></div>";
+print "<div>".$profilephoto."</div>";
+
+
 
 // Twitter then Instagram then Facebook?
 
@@ -221,6 +258,8 @@ print "<div>".$profilephoto."</div>
   //print render($content['field_snapchat_image']);
   //print render($content);
 ?>
+
+
 
   <?php print render($content['links']); ?>
 
