@@ -206,6 +206,7 @@ echo "<br>".$twitterdate;
 
   //default image
   $profilephoto = "<img src='http://placehold.it/200x200' />";
+  
   if (isset($content)){
 
   foreach($content as $field):
@@ -248,15 +249,6 @@ echo "<br>".$twitterdate;
 
 print "<div>".$profilephoto."</div>";
 
-
-
-// Twitter then Instagram then Facebook?
-
-  //print render($content['field_websitelink']['#items']['0']['url']);
-  //print render($content['field_twitterlink']['#items']['0']['url']);
-  //echo '<pre>'; print_r($content); echo '</pre>';
-  //print render($content['field_snapchat_image']);
-  //print render($content);
 ?>
 
 
